@@ -1,0 +1,54 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Shell.Web.Mvc.Html
+@using EPiServer.Framework.Web.Resources
+@inherits System.Web.Mvc.WebViewPage<AlloyDemoKit.AdminTools.MedicoverPlugin.ViewModels.MedicoverPluginViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Medicover Admin Tools</title>
+    <!-- Shell -->
+    @Html.Raw(ClientResources.RenderResources("ShellCore"))
+    @Html.Raw(ClientResources.RenderResources("ShellWidgets"))
+
+    <!-- LightTheme -->
+    @Html.Raw(ClientResources.RenderResources("ShellCoreLightTheme"))
+
+    <!-- Navigation -->
+    @Html.Raw(ClientResources.RenderResources("Navigation"))
+
+    <!-- Dojo Dashboard -->
+    @Html.Raw(ClientResources.RenderResources("DojoDashboardCompatibility", new[] { ClientResourceType.Style }))
+
+    <style>
+        a {
+            color: blue !important;
+        }
+
+            a:hover {
+                text-decoration: underline !important;
+            }
+    </style>
+</head>
+<body>
+    <div class="epi-padding epi-contentArea">
+        
+        <p>@Model.Text</p>
+
+       
+        @using (Html.BeginForm("SetVisibilityInMenu","MedicoverPlugin"))
+        {
+            <label for="pageId">Page Id: </label>
+            @*<input type="text" value="@Model.PageId" id="pageId"/>*@
+             @Html.EditorFor(m=>m.PageId)
+            <input type="submit" value="Set Visibility" name='button'/>
+        }
+    </div>
+</body>
+</html>

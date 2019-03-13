@@ -1,0 +1,21 @@
+﻿@using AlloyDemoKit
+@model IPageViewModel<GraphApiPage>
+
+@{
+    ViewBag.Title = "Graph API";
+    Layout = "~/Views/Shared/Layouts/_LeftNavigation.cshtml";
+}
+
+<h2>title</h2>
+
+<div class="row">
+    <h1>Graph data:</h1><br/>
+    @{
+        var model = Model.CurrentPage.CompositeGraphObject;
+        foreach (var document in model.DriveItems)
+        {
+            <div>@document.Name</div>
+        }
+    }
+
+</div>

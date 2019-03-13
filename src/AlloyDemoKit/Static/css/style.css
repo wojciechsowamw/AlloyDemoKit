@@ -410,15 +410,18 @@ ul {
 	color:#323335;
 	text-shadow:none !important;
 	box-shadow:none;
-	}	
+	}
 
-.alloyMenu .navbar .nav>li>a {
-	color:#323335;
-	padding-bottom:12px;
-	line-height:23px;
-	text-shadow:none !important;
-	outline:none;
-	}	
+    .alloyMenu .navbar .nav > li > a {
+        /*color:#323335;*/
+        color: #0f5cae;
+        padding: 13px 20px 11px 20px;
+        /*padding-bottom: 12px;*/
+        font-size: 2.4rem;
+        line-height: 23px;
+        text-shadow: none !important;
+        outline: none;
+    }	
 	
 .alloyMenu .navbar .nav>li>a:hover {
 	background:#fff;
