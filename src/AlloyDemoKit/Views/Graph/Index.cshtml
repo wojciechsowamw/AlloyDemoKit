@@ -33,10 +33,11 @@
                 <span>@Model.CurrentPage.CompositeGraphObject.User.MobilePhone</span>
             </div>
 
-            <div>
-                <span class="bold">Business phone: </span>
-                <span>@Model.CurrentPage.CompositeGraphObject.User.BusinessPhones.First()</span>
-            </div>
+             if (Model.CurrentPage.CompositeGraphObject.User.BusinessPhones.Any())
+             {
+                 <span class="bold">Business phone: </span>
+                 <span>@Model.CurrentPage.CompositeGraphObject.User.BusinessPhones.First()</span>
+             }
 
             <div>
                 <span class="bold">Language: </span>
@@ -125,8 +126,11 @@
             </div>
 
             <div>
-                <span class="bold">Location: </span>
-                <span>@Model.CurrentPage.CompositeGraphObject.Events[5].Locations.First().DisplayName</span>
+                @if (Model.CurrentPage.CompositeGraphObject.Events[5].Locations.Any())
+                {
+                    <span class="bold">Location: </span>
+                    <span>@Model.CurrentPage.CompositeGraphObject.Events[5].Locations.First().DisplayName</span>
+                }
             </div>
 
             <div>
@@ -171,7 +175,7 @@
             {
                 <div>
                     <span class="bold">@item.DisplayName: </span>
-                    <a href="@item.Links.OneNoteClientUrl">link</a>
+                    <a href="@item.Links.OneNoteWebUrl.Href">link</a>
                 </div>
             }
         }
