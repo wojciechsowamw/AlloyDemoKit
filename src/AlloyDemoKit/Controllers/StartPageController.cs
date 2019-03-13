@@ -1,3 +1,5 @@
+using System.Runtime.Caching;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using AlloyDemoKit.Models.Pages;
@@ -43,6 +45,8 @@ namespace AlloyDemoKit.Controllers
 
         public void SignOut()
         {
+            MemoryCache.Default.Remove("compositeGraphObject");
+
             HttpContext.GetOwinContext().Authentication.SignOut(
                 OpenIdConnectAuthenticationDefaults.AuthenticationType,
                 CookieAuthenticationDefaults.AuthenticationType);

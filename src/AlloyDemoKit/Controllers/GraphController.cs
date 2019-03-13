@@ -28,7 +28,6 @@ namespace AlloyDemoKit.Controllers
                 //var graphService = ServiceLocator.Current.GetInstance<GraphService>();
                 var graphProvider = new GraphAuthProvider(MemoryCache.Default);
                 var graphService = new GraphService(MemoryCache.Default, new GraphSdkHelper(graphProvider), graphProvider);
-                var picture = graphService.GetPictureBase64(upn);
                 CompositeGraphObject compositeGraphObject = await graphService.GetUserJson(upn, null);
 
                 currentPage.CompositeGraphObject = compositeGraphObject;

@@ -24,6 +24,8 @@ namespace AlloyDemoKit.Models.GraphApi
         public List<TeamChannel> TeamChannels { get; set; }
         public List<TeamChannelTab> TeamChannelTabs { get; set; }
         public List<AppRoleAssignment> AppRoleAssignments { get; set; }
+
+        public string Picture { get; set; }
     }
     public class AppRoleAssignment
     {

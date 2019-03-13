@@ -3,19 +3,277 @@
 
 @{
     ViewBag.Title = "Graph API";
-    Layout = "~/Views/Shared/Layouts/_LeftNavigation.cshtml";
+    //Layout = "~/Views/Shared/Layouts/_LeftNavigation.cshtml";
 }
 
-<h2>title</h2>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="row">
-    <h1>Graph data:</h1><br/>
-    @{
-        var model = Model.CurrentPage.CompositeGraphObject;
-        foreach (var document in model.DriveItems)
-        {
-            <div>@document.Name</div>
-        }
-    }
+    <div class="span4">
+        <i class="material-icons">person</i>
+        <h2>Personal</h2>
+        @{;
+            <div>
+                <span class="bold">Name: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.DisplayName</span>
+            </div>
 
+            <div>
+                <span class="bold">Mail: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.Mail</span>
+            </div>
+
+            <div>
+                <span class="bold">Job title: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.JobTitle</span>
+            </div>
+
+            <div>
+                <span class="bold">Mobile phone: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.MobilePhone</span>
+            </div>
+
+            <div>
+                <span class="bold">Business phone: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.BusinessPhones.First()</span>
+            </div>
+
+            <div>
+                <span class="bold">Language: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.PreferredLanguage</span>
+            </div>
+
+            <div>
+                <span class="bold">User was created on: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.AdditionalData.FirstOrDefault(k => k.Key == "createdDateTime").Value</span>
+            </div>
+        }
+    </div>
+    <div class="span4">
+        <i class="material-icons">photo_camera</i>
+        <h2>Picture</h2>
+        @{
+            <div>
+                <img src="@Model.CurrentPage.CompositeGraphObject.Picture" style="height: 140px;" />
+            </div>
+        }
+    </div>
+    <div class="span4">
+        <i class="material-icons">business</i>
+        <h2>Company</h2>
+        @{
+            <div>
+                <span class="bold">Company: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.CompanyName</span>
+            </div>
+
+            <div>
+                <span class="bold">Country: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.Country</span>
+            </div>
+
+            <div>
+                <span class="bold">Office location: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.OfficeLocation</span>
+            </div>
+
+            <div>
+                <span class="bold">Department: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.User.Department</span>
+            </div>
+        }
+    </div>
 </div>
+<div class="row">
+    <div class="span4">
+        <i class="material-icons">email</i>
+        <h2>Last email</h2>
+        @{
+            <div>
+                <span class="bold">From: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.Messages[0].From.EmailAddress.Address</span>
+            </div>
+
+            <div>
+                <span class="bold">Subject: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.Messages[0].Subject</span>
+            </div>
+
+            <div>
+                <span class="bold">Content: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.Messages[0].BodyPreview</span>
+            </div>
+
+            <div>
+                <span class="bold">Received: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.Messages[0].ReceivedDateTime</span>
+            </div>
+        }
+    </div>
+    <div class="span4">
+        <i class="material-icons">calendar_today</i>
+        <h2>Upcoming events</h2>
+        @{
+            <div>
+                <span class="bold">Subject: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.Events[5].Subject</span>
+            </div>
+
+            <div>
+                <span class="bold">When: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.Events[5].Start.DateTime</span>
+            </div>
+
+            <div>
+                <span class="bold">Location: </span>
+                <span>@Model.CurrentPage.CompositeGraphObject.Events[5].Locations.First().DisplayName</span>
+            </div>
+
+            <div>
+                <span class="bold">Content: </span>
+                @Html.Raw(Model.CurrentPage.CompositeGraphObject.Events[5].Body.Content)
+            </div>
+        }
+    </div>
+    <div class="span4">
+        <i class="material-icons">group</i>
+        <h2>Contacts:</h2>
+        @{
+            foreach (var contact in Model.CurrentPage.CompositeGraphObject.Contacts)
+            {
+                <div>
+                    <span class="bold">@contact.DisplayName: </span>
+                    <span>@contact.EmailAddresses.First().Address</span>
+                </div>
+            }
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="span4">
+        <i class="material-icons">insert_drive_file</i>
+        <h2>Sharepoint sites:</h2>
+        @{
+            foreach (var item in Model.CurrentPage.CompositeGraphObject.DriveItems)
+            {
+                <div>
+                    <span class="bold">@item.Name: </span>
+                    <a href="@item.WebUrl">link</a>
+                </div>
+            }
+        }
+    </div>
+    <div class="span4">
+        <i class="material-icons">notes</i>
+        <h2>OneNote sections:</h2>
+        @{
+            foreach (var item in Model.CurrentPage.CompositeGraphObject.OnenoteSections)
+            {
+                <div>
+                    <span class="bold">@item.DisplayName: </span>
+                    <a href="@item.Links.OneNoteClientUrl">link</a>
+                </div>
+            }
+        }
+    </div>
+    <div class="span4">
+        <i class="material-icons">event_note</i>
+        <h2>Planner tasks:</h2>
+        @{
+            foreach (var item in Model.CurrentPage.CompositeGraphObject.PlannerTasks)
+            {
+                <div>
+                    <span class="bold">Plan name: </span>
+                    <span>@Model.CurrentPage.CompositeGraphObject.PlannerPlans[0].Title</span>
+                </div>
+
+                <div>
+                    <span class="bold">Title: </span>
+                    <span>@item.Title</span>
+                </div>
+
+                <div>
+                    <span class="bold">Date: </span>
+                    <span>@item.DueDateTime</span>
+                </div>
+            }
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="span4">
+        <i class="material-icons">group_work</i>
+        <h2>Joined teams:</h2>
+        @{
+            foreach (var item in Model.CurrentPage.CompositeGraphObject.JoinedTeams)
+            {
+                <div>
+                    <span class="bold">Name: </span>
+                    <span>@item.DisplayName</span>
+                </div>
+
+                <div>
+                    <span class="bold">Description: </span>
+                    <span>@item.Description</span>
+                </div>
+            }
+        }
+    </div>
+    <div class="span4">
+        <i class="material-icons">group</i>
+        <h2>Team members:</h2>
+        @{
+            foreach (var item in Model.CurrentPage.CompositeGraphObject.TeamMembers)
+            {
+                <div>
+                    <div>
+                        <span class="bold">@item.DisplayName: </span>
+                        <span>@item.Mail</span>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="span4">
+        <i class="material-icons">donut_large</i>
+        <h2>Team channels:</h2>
+        @{
+            foreach (var item in Model.CurrentPage.CompositeGraphObject.TeamChannels)
+            {
+                <div>
+                    <span class="bold">Name: </span>
+                    <span>@item.DisplayName</span>
+                </div>
+
+                <div>
+                    <span class="bold">Description: </span>
+                    <span>@item.Description</span>
+                </div>
+            }
+
+            foreach (var item in Model.CurrentPage.CompositeGraphObject.TeamChannelTabs)
+            {
+                <div>
+                    <span class="bold">Channel tab: </span>
+                    <span>@item.DisplayName</span>
+                </div>
+            }
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="span4">
+        <i class="material-icons">apps</i>
+        <h2>My applications:</h2>
+        @{
+            foreach (var item in Model.CurrentPage.CompositeGraphObject.AppRoleAssignments)
+            {
+                <div>
+                    <span class="bold">@item.ResourceDisplayName </span>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<div style="margin-bottom: 200px"></div>

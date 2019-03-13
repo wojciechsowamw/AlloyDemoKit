@@ -681,3 +681,18 @@ a:hover { color: #578300; }
 .heroBlock { position: relative; }
 .heroBlock .heroBlockBackgroundImage { width: 100%; }
 .heroBlock .heroBlockCallout { position: absolute; padding: 1em; }
+
+
+.bold {
+    font-weight: bold;
+}
+
+h2 {
+    display: inline;
+    vertical-align: top;
+}
+
+i.material-icons {
+    display: inline;
+    font-size: 30px;
+}
